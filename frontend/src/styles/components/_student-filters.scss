@@ -1,0 +1,73 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Search + dropdowns row above the student table
+.student-filters {
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-3;
+  border-bottom: $border-width solid c("gray-g4");
+
+  @include below("sm2") {
+    padding: $space-3;
+    gap: $space-2;
+  }
+
+  .p-inputtext,
+  .p-dropdown {
+    min-height: $control-height;
+    border-color: c("gray-g5");
+    border-radius: $radius-md;
+    background: c("white-w1");
+    color: c("gray-g9");
+    font-size: $font-size-base;
+  }
+
+  .p-dropdown {
+    align-items: center;
+  }
+}
+
+.student-filters-search {
+  flex: 1 1 $search-min-width;
+  min-width: 0;
+
+  @include below("sm2") {
+    flex-basis: 100%;
+  }
+
+  .p-iconfield,
+  .p-inputtext {
+    width: 100%;
+  }
+}
+
+.student-filters-select {
+  .p-dropdown {
+    min-width: $filter-select-min-width;
+  }
+
+  // Phones: the two dropdowns share one row
+  @include below("sm2") {
+    flex: 1 1 0;
+    min-width: 0;
+
+    .p-dropdown {
+      width: 100%;
+      min-width: 0;
+    }
+
+    // Narrower chevron area so "All courses" fits without "…"
+    .p-dropdown-label {
+      padding-right: 0;
+    }
+
+    .p-dropdown-trigger,
+    .p-dropdown-clear-icon + .p-dropdown-trigger {
+      width: $space-8;
+    }
+  }
+}

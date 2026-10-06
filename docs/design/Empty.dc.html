@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Student list — empty</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2453D6}a:hover{color:#1A3FA8}
+</style>
+</helmet>
+<div style="min-height: 100%; background: #F5F6F8; font-family: 'Public Sans', system-ui, sans-serif; color: #1B2330; font-size: 14px; line-height: 150%">
+
+  <!-- Top bar -->
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E3E6EB">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px">
+        <span style="width: 28px; height: 28px; border-radius: 6px; background: #2453D6; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px">SA</span>
+        Student Admin
+      </div>
+      <span style="width: 32px; height: 32px; border-radius: 50%; background: #E6EDFC; color: #2453D6; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px">PP</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: 32px 40px 48px; display: flex; flex-direction: column; gap: 24px">
+
+    <!-- Page heading -->
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h1 style="margin: 0; font-size: 28px; line-height: 120%; font-weight: 700">Students</h1>
+        <p style="margin: 0; color: #5B6575">View and manage every enrolled student.</p>
+      </div>
+      <button type="button" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; min-height: 44px; border: 0; border-radius: 8px; background: #2453D6; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        Add student
+      </button>
+    </div>
+
+    <!-- List card -->
+    <section style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px; display: flex; flex-direction: column">
+
+      <!-- Filters (search applied, nothing matches) -->
+      <div style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; border-bottom: 1px solid #E3E6EB">
+        <label style="flex: 1 1 280px; display: flex; align-items: center; gap: 8px; padding: 0 12px; min-height: 44px; border: 1px solid #2453D6; border-radius: 8px; color: #5B6575">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search students</span>
+          <input type="search" value="zzz" style="flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; color: #1B2330; background: transparent">
+        </label>
+        <label style="display: flex">
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Course</span>
+          <select style="min-height: 44px; padding: 0 36px 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; font: inherit; color: #1B2330; background: #FFFFFF"><option>All courses</option></select>
+        </label>
+        <label style="display: flex">
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Status</span>
+          <select style="min-height: 44px; padding: 0 36px 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; font: inherit; color: #1B2330; background: #FFFFFF"><option>All statuses</option></select>
+        </label>
+      </div>
+
+      <!-- Empty state block -->
+      <div style="padding: 72px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+        <span style="width: 64px; height: 64px; border-radius: 50%; background: #F0F2F5; color: #5B6575; display: flex; align-items: center; justify-content: center">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>
+        </span>
+        <h2 style="margin: 0; font-size: 18px; font-weight: 600">No students found</h2>
+        <p style="margin: 0; max-width: 420px; color: #5B6575">No student matches your search or filters. Try a different name, or clear the filters.</p>
+        <button type="button" style="margin-top: 8px; padding: 10px 18px; min-height: 44px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #1B2330; font: inherit; font-weight: 600; cursor: pointer">Clear filters</button>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":760}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

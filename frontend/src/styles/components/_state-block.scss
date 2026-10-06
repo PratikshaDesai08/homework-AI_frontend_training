@@ -1,0 +1,55 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Empty / error block inside a list card
+.state-block {
+  padding: $space-18 $space-6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  text-align: center;
+
+  @include below("sm2") {
+    padding: $space-12 $space-4;
+  }
+}
+
+.state-block-icon {
+  width: $state-icon-size;
+  height: $state-icon-size;
+  border-radius: $radius-round;
+  background: c("gray-g3");
+  color: c("gray-g7");
+  font-size: $font-size-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // primeicons sets its own size; match the design's icon size
+  .pi {
+    font-size: $font-size-xl;
+  }
+
+  .state-block-error & {
+    background: c("red-r2");
+    color: c("red-r1");
+  }
+}
+
+.state-block-title {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.state-block-message {
+  margin: 0;
+  max-width: $state-text-max-width;
+  color: c("gray-g7");
+}
+
+.state-block-action {
+  margin-top: $space-2;
+}

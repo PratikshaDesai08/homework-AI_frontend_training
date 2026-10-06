@@ -1,0 +1,39 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Content area for every page in the (main) layout
+.main-content {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: $space-8 $space-10 $space-12;
+
+  @include below("md") {
+    padding: $space-5 $space-4 $space-8;
+  }
+}
+
+// Student list page
+.student-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+
+  @include below("md") {
+    gap: $space-4;
+  }
+}
+
+.student-list-card {
+  min-width: 0;
+  background: c("white-w1");
+  border: $border-width solid c("gray-g4");
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.student-list-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-1;
+}

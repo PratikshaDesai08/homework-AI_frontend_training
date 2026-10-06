@@ -1,0 +1,29 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Status pill. Text label + colour, so it never depends on colour alone.
+.student-status-tag {
+  display: inline-block;
+  padding: $space-1 $space-3;
+  border-radius: $radius-pill;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-base;
+  white-space: nowrap;
+}
+
+.student-status-tag-active {
+  background: c("green-g2");
+  color: c("green-g1");
+}
+
+.student-status-tag-inactive {
+  background: c("gray-g3");
+  color: c("gray-g8");
+}
+
+.student-status-tag-graduated {
+  background: c("blue-b3");
+  color: c("blue-b1");
+}

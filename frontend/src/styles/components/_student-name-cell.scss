@@ -1,0 +1,46 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Avatar + name + email in the first column
+.student-name-cell {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.student-name-cell-avatar {
+  flex: none;
+  width: $avatar-size;
+  height: $avatar-size;
+  border-radius: $radius-round;
+  background: c("blue-b3");
+  color: c("blue-b1");
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.student-name-cell-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: $name-cell-max-width;
+}
+
+// Long names wrap
+.student-name-cell-name {
+  font-weight: $font-weight-semibold;
+  overflow-wrap: anywhere;
+}
+
+// Long emails get "…" (full value in the title tooltip)
+.student-name-cell-email {
+  color: c("gray-g7");
+  font-size: $font-size-sm;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
