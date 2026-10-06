@@ -21,4 +21,4 @@ Route (app)                                 Size  First Load JS
 $ PLAYWRIGHT_BASE_URL=http://localhost:3000 npm run test:e2e
 (e2e/students-list.spec.ts: 9 tests, e2e/responsive.spec.ts: 40 tests)
 [49/49] [default] › e2e/responsive.spec.ts:19:9 › student-list-error @ 375px: no sideways scroll
-  49 passed (32.7s)
+  49 passed (32.8s)   (re-run after the mobile card layout change)

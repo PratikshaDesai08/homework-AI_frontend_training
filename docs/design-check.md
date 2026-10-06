@@ -1,7 +1,7 @@
 # Design check: Student List (HW1)
 
 Design: Claude Design canvas "Student List — HW1 Design" (https://claude.ai/artifact/6aoviCMyXxbLHgLPu5XyCL)
-Frames: desktop filled (1440) · empty / no results (1440) · loading skeleton (1440) · mobile filled (375)
+Frames: desktop filled (1440) · empty / no results (1440) · loading skeleton (1440) · mobile filled (375, card list)
 Source copy in repo: `docs/design/*.dc.html`
 
 Checked against training Step 2 Part A and `.claude/wm/wm-contract.md` (HTML development guideline, Design guidelines for designers).
@@ -28,11 +28,11 @@ Checked against training Step 2 Part A and `.claude/wm/wm-contract.md` (HTML dev
 5. **Error state** (list fails to load) is not drawn. My assumption is the same block as empty, with an error icon, the API message and a "Try again" button. It's needed in HW2.
 6. **Date format:** WM allows `May 1, 2016` or `YYYY-MM-DD`. The design uses a short month (`Aug 12, 2026`). Is the 3-letter month acceptable, or should it be the full month name?
 7. **Fees:** the WM three-digit comma rule gives `₹105,000`, not Indian grouping `₹1,05,000`. Please confirm.
-8. **Tablet (768–1024):** not drawn. My assumption is the table scrolls inside its box once the card is narrower than the table (about 960px), and the filters wrap.
+8. **Tablet (768–1024):** not drawn. Built as: cards up to 768px. From 769 to 1024 the table scrolls inside its own box (it needs about 960px) and the filters wrap.
 9. **Mobile actions:** the Actions column is left out at 375. How does a phone user view, edit or delete? Tap the row, or keep the action icons in a sticky last column?
 10. **Sorting:** columns show no sort indicator. Which columns can be sorted? (HW2 test cases cover sort.)
 11. **Rows per page:** fixed at 10, or should there be a selector?
 12. **Dark mode:** only light is drawn. WM needs a 1:1 dark colour for every light colour. Should the dark palette be drawn, or will developers derive it?
 
 ## Assumptions I'm building with (until answered)
-- Q1: 16px gutter at ≤ 768. Q3: name wraps, email gets "…". Q4: the empty block changes its text and button. Q5: the error block mirrors the empty block. Q6: short month. Q7: `₹105,000`. Q8: scroll inside the box. Q9: action icons stay in the scrolling table on mobile. Q10: sorting deferred to HW2. Q11: fixed at 10. Q12: dark tokens defined in SCSS, light theme only shown.
+- Q1: 16px gutter at ≤ 768. Q3: name wraps, email gets "…". Q4: the empty block changes its text and button. Q5: the error block mirrors the empty block. Q6: short month. Q7: `₹105,000`. Q8: scroll inside the box. Q9: **resolved 2026-10-06**. The first build kept a sideways-scrolling table on phones, and in review that hid status, dates, fees and actions behind a swipe. At ≤ 768px each student is now a card (name + status on top, then Course / Enrolled on / Fees paid, actions at the bottom). The mobile design frame was updated to match. Q10: sorting deferred to HW2. Q11: fixed at 10. Q12: dark tokens defined in SCSS, light theme only shown.

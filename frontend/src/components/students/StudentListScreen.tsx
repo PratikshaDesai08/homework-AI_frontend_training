@@ -116,10 +116,15 @@ export default function StudentListScreen() {
           >
             <Column
               header="Name"
+              className="app-data-table-cell-lead"
               body={(student: Student) => <StudentNameCell name={student.name} email={student.email} />}
             />
             <Column header="Course" field="course" />
-            <Column header="Status" body={(student: Student) => <StudentStatusTag status={student.status} />} />
+            <Column
+              header="Status"
+              className="app-data-table-cell-badge"
+              body={(student: Student) => <StudentStatusTag status={student.status} />}
+            />
             <Column
               header="Enrolled on"
               className="app-data-table-cell-nowrap"
