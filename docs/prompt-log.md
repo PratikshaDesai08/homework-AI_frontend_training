@@ -39,6 +39,14 @@ yes go ahead and let me know one the homework 1 is done along with the notion pa
 
 ### Follow-up prompts / corrections
 ```
+1. Yes push the branch.
+2. Guide me step by step on getting the demo link at a beginner level.
+3. I'll share the design link. Remind me later.
+4. I'll do it once everything is settled.
+5. I will need a clear, beginner level walkthrough as I am completely new to this, so that I can explain it to anyone.
+```
+```
+[screenshot of the list in Chrome DevTools at phone width] the mobile view doesn't seem good.
 ```
 
 ## HW2

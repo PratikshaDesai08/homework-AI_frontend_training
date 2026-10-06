@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { DataTable, type DataTablePageEvent, type DataTableValue } from "primereact/datatable";
+import { BREAKPOINTS } from "@/utils/breakpoints";
 import TableSkeleton from "./TableSkeleton";
 
 interface AppDataTableProps<T extends DataTableValue> {
@@ -23,7 +24,8 @@ interface AppDataTableProps<T extends DataTableValue> {
 }
 
 // Shared list table: PrimeReact DataTable + WM loading/empty states + pagination.
-// The table scrolls sideways inside its own box, never the page.
+// Phones and small tablets (≤ 768px): each row becomes a card (CSS only, see _app-data-table.scss).
+// Wider screens: a normal table that scrolls sideways inside its own box if needed, never the page.
 export default function AppDataTable<T extends DataTableValue>({
   value,
   dataKey,
@@ -41,7 +43,7 @@ export default function AppDataTable<T extends DataTableValue>({
     return <TableSkeleton rows={rows} columns={5} label={`Loading ${recordLabel}…`} />;
   }
 
-  // Shown only on screens narrower than the table (see SCSS)
+  // Shown only on tablets where the table is wider than its box (see SCSS)
   const scrollHint =
     value.length > 0 ? (
       <p className="app-data-table-scroll-hint">Swipe the table sideways to see all columns.</p>
@@ -54,6 +56,9 @@ export default function AppDataTable<T extends DataTableValue>({
       aria-label={ariaLabel}
       value={value}
       dataKey={dataKey}
+      // "stack" makes PrimeReact render a column-name label in every cell (used by the card layout)
+      responsiveLayout="stack"
+      breakpoint={BREAKPOINTS.md}
       emptyMessage={emptyState}
       footer={scrollHint}
       paginator={value.length > 0}

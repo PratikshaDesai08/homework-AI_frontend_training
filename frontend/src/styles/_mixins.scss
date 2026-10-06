@@ -7,3 +7,10 @@
     @content;
   }
 }
+
+// Between two WM breakpoints, e.g. @include between("md", "lg") = 769px … 1024px
+@mixin between($from, $to) {
+  @media (width > map.get($breakpoints, $from)) and (width <= map.get($breakpoints, $to)) {
+    @content;
+  }
+}

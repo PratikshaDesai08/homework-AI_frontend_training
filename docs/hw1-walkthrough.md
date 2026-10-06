@@ -300,10 +300,11 @@ src/styles/
 
 ### Responsive (all screen sizes)
 - `@include below("md") { … }` = `@media (max-width: 768px) { … }`. The names map to the WM widths 1920, 1600, 1366, 1280, 1024, 991, 768, 640, 480 and 375.
-- The **table is wider than a phone**, so it gets `min-width: 960px` and sits inside a box with `overflow-x: auto`. The **table** scrolls sideways inside its box, **the page never does**. That's the WM rule "no sideways scroll".
-- On phones the filters stack (search on its own row, the two dropdowns share the next one), the "Add student" button wraps under the title, and the pagination wraps onto two lines.
+- **Phones and small tablets (≤ 768px): every row becomes a card.** The header row is hidden. Each cell sits on its own line with its column name as a label ("Course", "Enrolled on", "Fees paid"). The status pill sits in the top-right corner and the action icons along the bottom. PrimeReact renders those labels because `AppDataTable` sets `responsiveLayout="stack"`. The card look itself is our SCSS (`_app-data-table.scss`, the `below("md")` block).
+- **Tablets (769–1024px):** the table needs about 960px, so it gets `min-width: 960px` inside a box with `overflow-x: auto`. The **table** scrolls inside its box, and a small hint says "Swipe the table sideways". **The page itself never scrolls sideways.** That's the WM rule.
+- On phones the filters also stack (search on its own row, the two dropdowns share the next one), the "Add student" button wraps under the title, and the pagination wraps onto two lines.
 
-**Say it like this:** "All raw values live in `_variables.scss`. Components only use variables. Colours are CSS variables with a day and a night value of the same name, so dark mode is one switch. On small screens the table scrolls inside its own box, so the page never scrolls sideways."
+**Say it like this:** "All raw values live in `_variables.scss`. Components only use variables. Colours are CSS variables with a day and a night value of the same name, so dark mode is one switch. On phones each row becomes a card, and on tablets the table scrolls inside its own box, so the page never scrolls sideways."
 
 ---
 
@@ -375,7 +376,10 @@ Try to answer each one aloud before reading the answer.
     All colours are in `_variables.scss` as WM-named day/night pairs. Components use `c("name")`, which becomes a CSS variable. A grep audit found zero hex colours outside that file.
 
 13. **How did you make sure there's no sideways scroll on phones?**
-    The table scrolls inside its own `overflow-x: auto` box, and the filters and buttons wrap. A Playwright test checks `scrollWidth <= clientWidth` at all 10 WM widths for every state, and I checked the screenshots by eye.
+    At ≤ 768px every row becomes a card, so nothing is wider than the screen. On tablets the table scrolls inside its own `overflow-x: auto` box. The filters and buttons wrap. A Playwright test checks `scrollWidth <= clientWidth` at all 10 WM widths for every state, and I checked the screenshots by eye.
+
+13b. **Why cards on mobile instead of a scrolling table?**
+    The first version scrolled the table sideways on phones. You only saw the name and half the course, and status, dates, fees and the action buttons were hidden behind a swipe. Cards show every field at once. The design's mobile frame was updated to match.
 
 14. **Why is the date shown as `Aug 12, 2026` and not `12/08/2026`?**
     The WM date format for English is `May 1, 2016` or `YYYY-MM-DD`. `formatDate` does it in one place.
