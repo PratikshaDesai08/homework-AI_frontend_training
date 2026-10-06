@@ -1,0 +1,9 @@
+@use "sass:map";
+@use "variables" as *;
+
+// Max-width media query using a WM breakpoint name, e.g. @include below("md") { ... }
+@mixin below($name) {
+  @media (max-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}

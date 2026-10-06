@@ -1,0 +1,78 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Loading placeholder rows (same columns as the table)
+.table-skeleton-head {
+  height: $space-10;
+  background: c("gray-g1");
+}
+
+.table-skeleton-row {
+  padding: $space-4 $space-5;
+  display: grid;
+  grid-template-columns: $skeleton-columns;
+  gap: $space-6;
+  align-items: center;
+  border-top: $border-width solid c("gray-g3");
+
+  // Phones: only the first column and status, like the visible part of the table
+  @include below("sm2") {
+    grid-template-columns: $skeleton-columns-mobile;
+    gap: $space-4;
+    padding: $space-3 $space-4;
+
+    > .skeleton:nth-child(n + 3) {
+      display: none;
+    }
+  }
+}
+
+.table-skeleton-lead {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.table-skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.skeleton {
+  display: block;
+  border-radius: $radius-sm;
+  background: c("gray-g3");
+  animation: skeleton-pulse $skeleton-pulse-duration ease-in-out infinite;
+}
+
+.table-skeleton-avatar {
+  flex: none;
+  width: $avatar-size;
+  height: $avatar-size;
+  border-radius: $radius-round;
+}
+
+.table-skeleton-line {
+  height: $skeleton-line-height;
+  width: $skeleton-line-width;
+}
+
+.table-skeleton-line-wide {
+  width: $skeleton-line-width-wide;
+}
+
+.table-skeleton-label {
+  margin: 0;
+  padding: $space-3 $space-5;
+  border-top: $border-width solid c("gray-g4");
+  color: c("gray-g7");
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: $skeleton-pulse-opacity;
+  }
+}

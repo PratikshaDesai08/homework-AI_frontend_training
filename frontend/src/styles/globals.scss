@@ -1,0 +1,54 @@
+@use "variables" as *;
+@use "functions" as *;
+@use "theme";
+
+// Components
+@use "components/buttons";
+@use "components/app-header";
+@use "components/page-heading";
+@use "components/state-block";
+@use "components/table-skeleton";
+@use "components/app-data-table";
+@use "components/student-filters";
+@use "components/student-status-tag";
+@use "components/student-name-cell";
+
+// Pages
+@use "pages/student-list";
+
+// Base reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: c("gray-g9");
+  background: c("gray-g2");
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Text only for screen readers (labels for icon-only controls)
+.visually-hidden {
+  position: absolute;
+  width: $border-width;
+  height: $border-width;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,4 @@
+// c("blue-b1") → var(--blue-b1). Components use this, so light/dark switches by itself.
+@function c($name) {
+  @return var(--#{$name});
+}

@@ -1,0 +1,123 @@
+// Design tokens: the ONLY place raw colour / size values may appear.
+// Source: Claude Design "Student List — HW1 Design" (docs/design/).
+// WM: colour names are colour + code (gray-g9, blue-b1), never "dark-blue".
+// WM: every day colour has exactly one night colour with the same name.
+
+// ---- Colours: day (light mode) ----
+$colors-day: (
+  // greys, light → dark
+  "gray-g1": #f9fafb, // table header background
+  "gray-g2": #f5f6f8, // page background
+  "gray-g3": #edeff2, // row divider, skeleton
+  "gray-g4": #e3e6eb, // card / control border
+  "gray-g5": #cdd2da, // input border
+  "gray-g6": #a3aab5, // disabled text
+  "gray-g7": #5b6575, // muted text
+  "gray-g8": #3a4352, // secondary text
+  "gray-g9": #1b2330, // body text
+  // surfaces
+  "white-w1": #ffffff, // card / header surface
+  // brand blue
+  "blue-b1": #2453d6, // primary
+  "blue-b2": #1a3fa8, // primary hover
+  "blue-b3": #e6edfc, // primary tint (avatar, graduated tag)
+  // status
+  "green-g1": #1d6b3f, // active tag text
+  "green-g2": #e3f4ea, // active tag background
+  "red-r1": #b4232c, // destructive / error
+  "red-r2": #fdecec, // error tint
+);
+
+// ---- Colours: night (dark mode), same names 1:1 ----
+$colors-night: (
+  "gray-g1": #1a1e25,
+  "gray-g2": #0f1216,
+  "gray-g3": #252a33,
+  "gray-g4": #2c323c,
+  "gray-g5": #3a414d,
+  "gray-g6": #5d6573,
+  "gray-g7": #9aa3b1,
+  "gray-g8": #c2c8d1,
+  "gray-g9": #e8ebef,
+  "white-w1": #161a20,
+  "blue-b1": #6d8ff0,
+  "blue-b2": #93adf5,
+  "blue-b3": #1e2a4a,
+  "green-g1": #7fd3a2,
+  "green-g2": #173726,
+  "red-r1": #f08088,
+  "red-r2": #3a1c1f,
+);
+
+// Constant colours (same in both modes)
+$constant-white-w0: #ffffff; // text on primary buttons
+
+// ---- Typography ----
+$font-family-base: var(--font-base), system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-size-xs: 0.75rem; // 12px: table headers, tags
+$font-size-sm: 0.8125rem; // 13px: secondary lines
+$font-size-base: 0.875rem; // 14px: body
+$font-size-md: 1rem; // 16px: brand
+$font-size-lg: 1.125rem; // 18px: state-block title
+$font-size-xl: 1.375rem; // 22px: page title (mobile)
+$font-size-xxl: 1.75rem; // 28px: page title (desktop)
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$line-height-base: 150%;
+$line-height-tight: 120%;
+$letter-spacing-caps: 0.04em;
+
+// ---- Spacing (4px scale) ----
+$space-1: 0.25rem; // 4
+$space-2: 0.5rem; // 8
+$space-3: 0.75rem; // 12
+$space-4: 1rem; // 16
+$space-5: 1.25rem; // 20
+$space-6: 1.5rem; // 24
+$space-8: 2rem; // 32
+$space-10: 2.5rem; // 40
+$space-12: 3rem; // 48
+$space-18: 4.5rem; // 72
+
+// ---- Sizes ----
+$border-width: 1px;
+$radius-sm: 0.375rem; // 6
+$radius-md: 0.5rem; // 8
+$radius-lg: 0.75rem; // 12
+$radius-pill: 999px;
+$radius-round: 50%;
+$content-max-width: 85rem; // 1360
+$control-height: 2.75rem; // 44: inputs, buttons (tap target)
+$icon-button-size: 2.25rem; // 36
+$avatar-size: 2.25rem; // 36
+$brand-mark-size: 1.75rem; // 28
+$user-avatar-size: 2rem; // 32
+$state-icon-size: 4rem; // 64
+$filter-select-min-width: 10rem; // 160
+$search-min-width: 17.5rem; // 280
+$table-min-width: 60rem; // 960: below this the table scrolls inside its box
+$state-text-max-width: 26.25rem; // 420
+$name-cell-max-width: 18rem; // 288: long emails get "…"
+$skeleton-line-height: 0.75rem; // 12
+$skeleton-line-width: 70%;
+$skeleton-line-width-wide: 55%;
+$skeleton-columns: 2.4fr 1.2fr 0.8fr 1fr 0.8fr 0.8fr; // matches the table's column proportions
+$skeleton-columns-mobile: 2fr 1fr;
+$skeleton-pulse-duration: 1.4s;
+$skeleton-pulse-opacity: 0.5;
+
+// ---- WM breakpoints: 1920 → 1600 → 1366 → 1280 → 1024 → 991 → 768 → 640 → 480 → 375 ----
+$breakpoints: (
+  "xxl": 1920px,
+  "xl2": 1600px,
+  "xl": 1366px,
+  "lg2": 1280px,
+  "lg": 1024px,
+  "md2": 991px,
+  "md": 768px,
+  "sm2": 640px,
+  "sm": 480px,
+  "xs": 375px,
+);

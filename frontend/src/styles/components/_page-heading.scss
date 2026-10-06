@@ -1,0 +1,44 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Page title row: title block left, actions right, wraps on small screens
+.page-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $space-4;
+}
+
+.page-heading-text {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.page-heading-title {
+  margin: 0;
+  font-size: $font-size-xxl;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-bold;
+
+  @include below("md") {
+    font-size: $font-size-xl;
+  }
+}
+
+.page-heading-subtitle {
+  margin: 0;
+  color: c("gray-g7");
+
+  @include below("md") {
+    font-size: $font-size-sm;
+  }
+}
+
+.page-heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}

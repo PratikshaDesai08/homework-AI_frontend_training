@@ -1,0 +1,162 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Shared list table (PrimeReact DataTable restyled to the design)
+.app-data-table {
+  // The table scrolls sideways inside its own box, never the page
+  .p-datatable-wrapper {
+    overflow-x: auto;
+  }
+
+  .p-datatable-thead > tr > th {
+    padding: $space-3 $space-4;
+    background: c("gray-g1");
+    color: c("gray-g7");
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-caps;
+    border: none;
+    white-space: nowrap;
+  }
+
+  .p-datatable-tbody > tr {
+    background: c("white-w1");
+    color: c("gray-g9");
+
+    > td {
+      padding: $space-3 $space-4;
+      border: none;
+      border-top: $border-width solid c("gray-g3");
+    }
+  }
+
+  // Wider padding on the outer edges of the table
+  .p-datatable-thead > tr > th:first-child,
+  .p-datatable-tbody > tr > td:first-child {
+    padding-left: $space-5;
+  }
+
+  .p-datatable-thead > tr > th:last-child,
+  .p-datatable-tbody > tr > td:last-child {
+    padding-right: $space-5;
+  }
+
+  // Footer only holds the scroll hint
+  .p-datatable-footer {
+    padding: 0;
+    background: none;
+    border: none;
+  }
+
+  // Empty / error block fills the whole row
+  .p-datatable-emptymessage > td {
+    padding: 0;
+  }
+
+  // Pagination row
+  .p-paginator {
+    padding: $space-3 $space-5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: $space-1;
+    background: c("white-w1");
+    border: none;
+    border-top: $border-width solid c("gray-g4");
+    border-radius: 0 0 $radius-lg $radius-lg;
+
+    @include below("sm2") {
+      justify-content: center;
+      padding: $space-3;
+    }
+  }
+
+  .p-paginator-current {
+    margin-right: auto;
+    padding: 0;
+    height: auto;
+    color: c("gray-g7");
+    cursor: default;
+
+    @include below("sm2") {
+      flex: 1 1 100%;
+      margin: 0 0 $space-2;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  .p-paginator-pages {
+    display: flex;
+    gap: $space-1;
+  }
+
+  .p-paginator-page,
+  .p-paginator-prev,
+  .p-paginator-next {
+    min-width: $space-10;
+    height: $space-10;
+    margin: 0;
+    border: $border-width solid c("gray-g4");
+    border-radius: $radius-md;
+    background: c("white-w1");
+    color: c("gray-g9");
+
+    @include below("sm2") {
+      min-width: $control-height;
+      height: $control-height;
+    }
+
+    &:disabled {
+      color: c("gray-g6");
+    }
+  }
+
+  .p-paginator-page.p-highlight {
+    background: c("blue-b1");
+    border-color: c("blue-b1");
+    color: $constant-white-w0;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.app-data-table-table {
+  width: 100%;
+  min-width: $table-min-width;
+}
+
+// Number columns: right-aligned, digits line up
+.app-data-table-cell-number,
+.app-data-table-cell-actions {
+  text-align: right;
+
+  .p-column-header-content {
+    justify-content: flex-end;
+  }
+}
+
+.app-data-table-cell-number {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+// Short values that must stay on one line (dates)
+.app-data-table-cell-nowrap {
+  white-space: nowrap;
+}
+
+// "Swipe sideways" hint, only where the table is wider than its box
+.app-data-table-scroll-hint {
+  display: none;
+  margin: 0;
+  padding: $space-2 $space-3;
+  border-top: $border-width solid c("gray-g3");
+  color: c("gray-g7");
+  font-size: $font-size-xs;
+
+  @include below("lg") {
+    display: block;
+  }
+}

@@ -1,0 +1,56 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Top bar
+.app-header {
+  background: c("white-w1");
+  border-bottom: $border-width solid c("gray-g4");
+}
+
+.app-header-inner {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: $space-3 $space-10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+
+  @include below("md") {
+    padding: $space-3 $space-4;
+  }
+}
+
+.app-header-brand {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+}
+
+.app-header-mark {
+  width: $brand-mark-size;
+  height: $brand-mark-size;
+  border-radius: $radius-sm;
+  background: c("blue-b1");
+  color: $constant-white-w0;
+  font-size: $font-size-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-header-user {
+  width: $user-avatar-size;
+  height: $user-avatar-size;
+  border-radius: $radius-round;
+  background: c("blue-b3");
+  color: c("blue-b1");
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
