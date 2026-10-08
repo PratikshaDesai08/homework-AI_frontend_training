@@ -17,10 +17,25 @@ test.describe("Student list", () => {
   test("shows WM date and number formats", async ({ page }) => {
     const firstRow = page.locator(".p-datatable-tbody > tr").first();
     await expect(firstRow).toContainText("Aarav Sharma");
-    await expect(firstRow).toContainText("Aug 12, 2026");
+    await expect(firstRow).toContainText("August 12, 2026");
     await expect(firstRow).toContainText("₹45,000");
     // 7th row: a 6-digit amount uses a comma every 3 digits, not Indian grouping
     await expect(page.locator(".p-datatable-tbody > tr").nth(6)).toContainText("₹105,000");
+  });
+
+  test("desktop table: fees right-aligned, dates on one line (1024px)", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 900 });
+    const cells = await page.evaluate(() => {
+      const row = document.querySelectorAll(".p-datatable-tbody > tr")[3]; // "September 2, 2026": a long date
+      const [, , , date, fees] = Array.from(row.children) as HTMLElement[];
+      // Count the lines of the date text itself (the cell is as tall as the 2-line name cell)
+      const range = document.createRange();
+      range.selectNodeContents(date);
+      const dateLines = new Set(Array.from(range.getClientRects()).map((rect) => Math.round(rect.top))).size;
+      return { dateLines, feesAlign: getComputedStyle(fees).textAlign };
+    });
+    expect(cells.dateLines).toBe(1);
+    expect(cells.feesAlign).toBe("right");
   });
 
   test("goes to the next page", async ({ page }) => {

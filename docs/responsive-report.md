@@ -6,7 +6,7 @@ PLAYWRIGHT_BASE_URL=http://localhost:3000 npm run test:e2e
 ```
 `e2e/responsive.spec.ts` loads each state at every WM width, saves a full-page screenshot, and fails if the page scrolls sideways or any element sticks out past the right edge. Elements inside a scroll box, like the table, are ignored.
 
-Result: **40 / 40 passed**. No sideways scroll on the page at any width from 1920 to 375. Screenshots were also checked by eye at 1920, 1366, 1024, 768 and 375.
+Result: **40 / 40 passed** (re-run 2026-10-08 after the review fixes). No sideways scroll on the page at any width from 1920 to 375. Screenshots were also checked by eye at 1920, 1366, 1024, 768 and 375.
 
 Screenshots: `docs/screenshots/<state>/<width>.png`
 
@@ -26,6 +26,7 @@ Screenshots: `docs/screenshots/<state>/<width>.png`
 Browser: Chromium (Playwright, Desktop Chrome profile). Not checked: Safari and Firefox.
 
 ## Fixed during the check
+- **HW1 review (2026-10-07):** dates now use the full month name (`August 12, 2026`, WM `May 1, 2016`). While re-checking at 1024px, I found that the mobile-card change (commit `167f277`) had deleted four desktop table rules: right-aligned fees and actions, aligned digits, and dates on one line. Restored, and a new Playwright test checks them at 1024px (it fails without the fix).
 - 375: dropdown placeholders were cut off ("All cour…"). Fixed with a narrower chevron area on phones.
 - 768: dates wrapped onto two lines. Fixed with `white-space: nowrap` on the date column.
 - **Phones showed only the name and half the course** (found in review). Everything else needed a sideways swipe inside the table. Fixed by turning each row into a card at ≤ 768px. PrimeReact's `responsiveLayout="stack"` renders a label in each cell, but its runtime CSS injection didn't apply in Next.js, so the card layout is our own SCSS in `_app-data-table.scss`.

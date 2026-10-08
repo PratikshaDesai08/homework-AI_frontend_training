@@ -1,4 +1,4 @@
-HW1 check output: 2026-10-06, branch hw1-student-list, run from frontend/
+HW1 check output: re-run 2026-10-08 after review fixes, branch hw1-student-list, run from frontend/
 
 $ npx tsc --noEmit
 exit code: 0
@@ -19,6 +19,5 @@ Route (app)                                 Size  First Load JS
 ○  (Static)  prerendered as static content
 
 $ PLAYWRIGHT_BASE_URL=http://localhost:3000 npm run test:e2e
-(e2e/students-list.spec.ts: 9 tests, e2e/responsive.spec.ts: 40 tests)
-[49/49] [default] › e2e/responsive.spec.ts:19:9 › student-list-error @ 375px: no sideways scroll
-  49 passed (32.8s)   (re-run after the mobile card layout change)
+(e2e/students-list.spec.ts: 10 tests, e2e/responsive.spec.ts: 40 tests)
+  50 passed (32.8s)
