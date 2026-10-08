@@ -1,0 +1,7 @@
+{
+    "statusCode": 409,
+    "message": "A student with this email already exists.",
+    "errors": {
+        "email": "A student with this email already exists."
+    }
+}

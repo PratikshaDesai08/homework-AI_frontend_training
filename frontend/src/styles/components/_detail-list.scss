@@ -1,0 +1,49 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Label / value card on the details page
+.detail-list {
+  background: c("white-w1");
+  border: $border-width solid c("gray-g4");
+  border-radius: $radius-lg;
+}
+
+.detail-list-title {
+  margin: 0;
+  padding: $space-4 $space-5;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  border-bottom: $border-width solid c("gray-g4");
+}
+
+.detail-list-grid {
+  margin: 0;
+  padding: $space-5;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($detail-item-min-width, 1fr));
+  gap: $space-5 $space-6;
+}
+
+.detail-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  min-width: 0;
+}
+
+.detail-list-label {
+  color: c("gray-g7");
+  font-size: $font-size-sm;
+}
+
+.detail-list-value {
+  margin: 0;
+  font-size: $font-size-base;
+  overflow-wrap: anywhere;
+}
+
+.detail-list-value-muted {
+  color: c("gray-g7");
+  font-style: italic;
+}

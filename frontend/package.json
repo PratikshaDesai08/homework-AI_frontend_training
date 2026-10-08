@@ -12,7 +12,8 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
-    "test:e2e:mutation": "playwright test --project=mutation"
+    "test:e2e:mutation": "playwright test --project=mutation",
+    "test:e2e:all": "playwright test --project=default --project=mutation"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.104.1",

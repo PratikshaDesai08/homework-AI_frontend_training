@@ -1,0 +1,86 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Label + input + help / error text
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  min-width: 0;
+
+  // Every PrimeReact input fills the field and matches the design
+  .p-inputtext,
+  .p-dropdown,
+  .p-calendar,
+  .p-inputnumber {
+    width: 100%;
+  }
+
+  .p-inputtext,
+  .p-dropdown {
+    min-height: $control-height;
+    border-color: c("gray-g5");
+    border-radius: $radius-md;
+    background: c("white-w1");
+    color: c("gray-g9");
+    font-size: $font-size-base;
+  }
+
+  .p-dropdown {
+    align-items: center;
+  }
+
+  .p-calendar .p-inputtext {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .p-datepicker-trigger {
+    background: c("white-w1");
+    border: $border-width solid c("gray-g5");
+    border-left: none;
+    color: c("gray-g7");
+    border-radius: 0 $radius-md $radius-md 0;
+  }
+
+  ::placeholder,
+  .p-dropdown-label.p-placeholder {
+    color: c("gray-g6");
+  }
+
+  // Invalid inputs: the design's red, not PrimeReact's
+  .p-invalid.p-inputtext,
+  .p-invalid.p-dropdown,
+  .p-invalid .p-inputtext,
+  .p-invalid + .p-datepicker-trigger {
+    border-color: c("red-r1");
+  }
+}
+
+.form-field-label {
+  font-weight: $font-weight-semibold;
+}
+
+.form-field-required {
+  color: c("red-r1");
+}
+
+.form-field-optional {
+  color: c("gray-g7");
+  font-weight: $font-weight-regular;
+}
+
+.form-field-help,
+.form-field-error {
+  margin: 0;
+  font-size: $font-size-sm;
+}
+
+.form-field-help {
+  color: c("gray-g7");
+}
+
+.form-field-error {
+  color: c("red-r1");
+}

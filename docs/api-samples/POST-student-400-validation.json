@@ -1,0 +1,12 @@
+{
+    "statusCode": 400,
+    "message": "Please fix the highlighted fields.",
+    "errors": {
+        "name": "Name is required.",
+        "email": "Enter a valid email address, like name@example.com.",
+        "phone": "Phone must be exactly 10 digits.",
+        "course": "Course is required.",
+        "enrolledOn": "Enrolled on must be a valid date that is not in the future.",
+        "feesPaid": "Fees paid cannot be negative."
+    }
+}

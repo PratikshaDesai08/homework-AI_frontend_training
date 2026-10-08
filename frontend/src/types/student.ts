@@ -1,4 +1,4 @@
-// Student entity, the same shape the HW2 API will return.
+// Student entity and API shapes. Field names match the backend (backend/src/students).
 
 export const STUDENT_COURSES = [
   "Full Stack Web",
@@ -13,6 +13,7 @@ export const STUDENT_STATUSES = ["Active", "Inactive", "Graduated"] as const;
 export type StudentCourse = (typeof STUDENT_COURSES)[number];
 export type StudentStatus = (typeof STUDENT_STATUSES)[number];
 
+/** One student as the API returns it (GET /students/:id, items of GET /students) */
 export interface Student {
   id: number;
   name: string;
@@ -24,8 +25,33 @@ export interface Student {
   enrolledOn: string;
   /** Whole rupees */
   feesPaid: number;
+  /** ISO date-time */
+  createdAt: string;
+  /** ISO date-time */
+  updatedAt: string;
 }
 
+/** Body of POST /students and PATCH /students/:id */
+export type StudentPayload = Pick<Student, "name" | "email" | "phone" | "course" | "status" | "enrolledOn" | "feesPaid">;
+
+/** GET /students response */
+export interface StudentListResponse {
+  items: Student[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
+/** Query string of GET /students */
+export interface StudentListParams {
+  search?: string;
+  course?: StudentCourse;
+  status?: StudentStatus;
+  page: number;
+  limit: number;
+}
+
+/** Filters the user controls on the list screen */
 export interface StudentListFilters {
   search: string;
   course: StudentCourse | null;

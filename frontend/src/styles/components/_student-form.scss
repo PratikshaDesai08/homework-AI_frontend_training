@@ -1,0 +1,56 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Add / edit student form card
+.student-form {
+  width: 100%;
+  max-width: $form-max-width;
+  background: c("white-w1");
+  border: $border-width solid c("gray-g4");
+  border-radius: $radius-lg;
+}
+
+.p-inline-message.student-form-banner {
+  display: flex;
+  margin: $space-5 $space-5 0;
+  padding: $space-3 $space-4;
+  justify-content: flex-start;
+  gap: $space-2;
+  border: none;
+  border-radius: $radius-md;
+  background: c("red-r2");
+  color: c("red-r1");
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+
+  .p-inline-message-icon,
+  .p-inline-message-text {
+    font-size: $font-size-base;
+  }
+
+  .p-inline-message-icon {
+    color: c("red-r1");
+  }
+}
+
+// 2 columns on wide screens, 1 column on phones
+.student-form-grid {
+  padding: $space-5;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($form-field-min-width, 1fr));
+  gap: $space-5 $space-6;
+
+  @include below("sm2") {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.student-form-actions {
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: $space-2;
+  border-top: $border-width solid c("gray-g4");
+}

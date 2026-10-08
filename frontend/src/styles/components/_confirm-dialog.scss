@@ -1,0 +1,69 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// "Delete student?" dialog (PrimeReact ConfirmDialog restyled to the design)
+.p-component-overlay.p-dialog-mask {
+  background: c("overlay-o1");
+}
+
+.p-dialog.app-confirm-dialog {
+  width: calc(100% - #{$space-8});
+  max-width: $dialog-max-width;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-dialog;
+  overflow: hidden;
+
+  .p-dialog-header,
+  .p-dialog-content,
+  .p-dialog-footer {
+    background: c("white-w1");
+    color: c("gray-g9");
+  }
+
+  .p-dialog-header {
+    padding: $space-5 $space-5 0;
+  }
+
+  .p-dialog-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+  }
+
+  .p-dialog-content {
+    padding: $space-3 $space-5 0;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-4;
+  }
+
+  .p-confirm-dialog-icon {
+    flex: none;
+    width: $dialog-icon-size;
+    height: $dialog-icon-size;
+    border-radius: $radius-round;
+    background: c("red-r2");
+    color: c("red-r1");
+    font-size: $font-size-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .p-confirm-dialog-message {
+    margin: 0;
+    color: c("gray-g8");
+  }
+
+  .p-dialog-footer {
+    padding: $space-5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: $space-2;
+
+    .p-button {
+      margin: 0;
+    }
+  }
+}

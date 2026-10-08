@@ -4,7 +4,9 @@
 
 // PrimeReact Button variants used across the app. Width always comes from padding.
 .p-button.primary-button,
-.p-button.secondary-button {
+.p-button.secondary-button,
+.p-button.danger-button,
+.p-button.danger-outline-button {
   min-height: $control-height;
   padding: $space-2 $space-4;
   border-radius: $radius-md;
@@ -43,6 +45,48 @@
     border-color: c("gray-g5");
     color: c("gray-g9");
   }
+}
+
+// Delete (filled red) in the confirm dialog
+.p-button.danger-button {
+  background: c("red-r1");
+  border: $border-width solid c("red-r1");
+  color: $constant-white-w0;
+
+  &:not(:disabled):hover {
+    background: c("red-r1");
+    border-color: c("red-r1");
+    color: $constant-white-w0;
+    opacity: $busy-opacity + 0.3;
+  }
+}
+
+// Delete (red outline) on the details page
+.p-button.danger-outline-button {
+  background: c("white-w1");
+  border: $border-width solid c("red-r1");
+  color: c("red-r1");
+
+  &:not(:disabled):hover {
+    background: c("red-r2");
+    border-color: c("red-r1");
+    color: c("red-r1");
+  }
+}
+
+// Links styled as buttons (Next <Link className="p-button …">)
+a.p-button {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Keyboard focus ring on every button
+.p-button:focus-visible {
+  outline: $border-width * 2 solid c("blue-b1");
+  outline-offset: $border-width * 2;
+  box-shadow: none;
 }
 
 // Round icon-only buttons in table rows

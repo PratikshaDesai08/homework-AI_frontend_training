@@ -3,6 +3,7 @@ import { Public_Sans } from "next/font/google";
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primeicons/primeicons.css";
 import "@/styles/globals.scss";
+import Providers from "./providers";
 
 // Public Sans: the font used in the design
 const fontBase = Public_Sans({
@@ -22,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="light">
-      <body className={fontBase.variable}>{children}</body>
+      <body className={fontBase.variable}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

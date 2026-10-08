@@ -37,3 +37,28 @@
   justify-content: flex-end;
   gap: $space-1;
 }
+
+// Name cell is a link to the details page
+.student-list-name-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: $radius-sm;
+
+  &:hover .student-name-cell-name {
+    color: c("blue-b1");
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: $border-width * 2 solid c("blue-b1");
+    outline-offset: $space-1;
+  }
+}
+
+// Icon links in the actions column look like the icon buttons
+.student-list-actions a.p-button-text {
+  width: $icon-button-size;
+  height: $icon-button-size;
+  color: c("gray-g7");
+}

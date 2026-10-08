@@ -1,0 +1,26 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// "← Back to …" link
+.back-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  min-height: $control-height;
+  color: c("blue-b1");
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+
+  &:hover {
+    color: c("blue-b2");
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: $border-width * 2 solid c("blue-b1");
+    outline-offset: $space-1;
+    border-radius: $radius-sm;
+  }
+}

@@ -1,0 +1,82 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Details, add and edit pages: same column layout as the list
+.student-details-container,
+.student-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+
+  @include below("md") {
+    gap: $space-4;
+  }
+}
+
+// Heading: avatar + name + status left, actions right; wraps on small screens
+.student-details-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+}
+
+.student-details-identity {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  min-width: 0;
+}
+
+.student-details-avatar {
+  flex: none;
+  width: $details-avatar-size;
+  height: $details-avatar-size;
+  border-radius: $radius-round;
+  background: c("blue-b3");
+  color: c("blue-b1");
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.student-details-text {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  min-width: 0;
+}
+
+.student-details-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-2 $space-3;
+}
+
+.student-details-title {
+  margin: 0;
+  font-size: $font-size-xxl;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-bold;
+  overflow-wrap: anywhere;
+
+  @include below("md") {
+    font-size: $font-size-xl;
+  }
+}
+
+.student-details-email {
+  color: c("gray-g7");
+  overflow-wrap: anywhere;
+}
+
+.student-details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}

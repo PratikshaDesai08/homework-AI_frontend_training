@@ -1,0 +1,5 @@
+{
+    "message": "Student not found. It may have been deleted.",
+    "error": "Not Found",
+    "statusCode": 404
+}
