@@ -1,0 +1,16 @@
+# dependencies and build output
+node_modules/
+dist/
+coverage/
+
+# local SQLite database (seeded on start)
+data/
+*.sqlite
+
+# env and editor files
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+*.tsbuildinfo

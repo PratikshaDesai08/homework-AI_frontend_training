@@ -1,0 +1,12 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module.js';
+import { configureApp } from './common/configure-app.js';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  configureApp(app);
+  const port = Number(process.env.PORT ?? 4000);
+  await app.listen(port);
+  console.log(`API ready on http://localhost:${port}/api/v1 · docs: http://localhost:${port}/api/docs`);
+}
+await bootstrap();
