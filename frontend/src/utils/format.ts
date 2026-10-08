@@ -1,7 +1,7 @@
-// WM formats. Date: "May 1, 2016" (English). Numbers: a comma every 3 digits.
+// WM formats. Date: "May 1, 2016" (English, full month name). Numbers: a comma every 3 digits.
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
-  month: "short",
+  month: "long",
   day: "numeric",
   year: "numeric",
   timeZone: "UTC",
@@ -9,7 +9,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 
 const numberFormatter = new Intl.NumberFormat("en-US");
 
-/** "2026-08-12" → "Aug 12, 2026". Parsed as UTC so the day never shifts by timezone. */
+/** "2026-08-12" → "August 12, 2026". Parsed as UTC so the day never shifts by timezone. */
 export function formatDate(isoDate: string): string {
   const [year, month, day] = isoDate.split("-").map(Number);
   if (!year || !month || !day) return isoDate;

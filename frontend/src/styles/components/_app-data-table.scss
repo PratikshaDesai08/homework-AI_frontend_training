@@ -131,6 +131,26 @@
   }
 }
 
+// Number columns: right-aligned, digits line up
+.app-data-table-cell-number,
+.app-data-table-cell-actions {
+  text-align: right;
+
+  .p-column-header-content {
+    justify-content: flex-end;
+  }
+}
+
+.app-data-table-cell-number {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+// Short values that must stay on one line (dates)
+.app-data-table-cell-nowrap {
+  white-space: nowrap;
+}
+
 // ---- Card layout (≤ 768px) ----
 // Each row becomes a card: header row hidden, every cell on its own line with its column name
 // as a label. PrimeReact already renders that label in each cell (.p-column-title, hidden by default).
