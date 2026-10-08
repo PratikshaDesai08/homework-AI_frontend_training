@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Add student</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2453D6}a:hover{color:#1A3FA8}
+</style>
+</helmet>
+<div style="min-height: 100%; background: #F5F6F8; font-family: 'Public Sans', system-ui, sans-serif; color: #1B2330; font-size: 14px; line-height: 150%">
+
+  <!-- Top bar -->
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E3E6EB">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 12px clamp(16px, calc(100vw - 768px), 40px); display: flex; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px">
+        <span style="width: 28px; height: 28px; border-radius: 6px; background: #2453D6; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px">SA</span>
+        Student Admin
+      </div>
+      <span style="width: 32px; height: 32px; border-radius: 50%; background: #E6EDFC; color: #2453D6; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px">PP</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: clamp(20px, calc(100vw - 748px), 32px) clamp(16px, calc(100vw - 768px), 40px) 48px; display: flex; flex-direction: column; gap: clamp(16px, calc(100vw - 760px), 24px)">
+
+    <!-- Back link -->
+    <a href="{{backHref}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; text-decoration: none">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      {{backLabel}}
+    </a>
+
+    <!-- Page heading -->
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: clamp(22px, calc(100vw - 746px), 28px); line-height: 120%; font-weight: 700">{{title}}</h1>
+      <p style="margin: 0; color: #5B6575; font-size: clamp(13px, calc(100vw - 754px), 14px)">Fields marked <span style="color: #B4232C">*</span> are required.</p>
+    </div>
+
+    <!-- Form card -->
+    <form style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px; max-width: 880px; width: 100%; box-sizing: border-box">
+
+      <!-- Error banner (after a failed submit) -->
+      <sc-if value="{{showErrors}}" hint-placeholder-val="{{ false }}">
+        <div role="alert" style="margin: 20px 20px 0; padding: 12px 16px; border-radius: 8px; background: #FDECEC; color: #B4232C; display: flex; align-items: center; gap: 10px; font-weight: 600">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          Please fix the highlighted fields.
+        </div>
+      </sc-if>
+
+      <!-- Fields: 2 columns on wide screens, 1 column on phones -->
+      <div style="padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px 24px">
+
+        <!-- Full name -->
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 600">Full name <span style="color: #B4232C">*</span></span>
+          <input type="text" value="{{name.value}}" placeholder="e.g. Aarav Sharma" style="{{name.inputStyle}}">
+          <span style="{{name.noteStyle}}">{{name.note}}</span>
+        </label>
+
+        <!-- Email -->
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 600">Email <span style="color: #B4232C">*</span></span>
+          <input type="email" value="{{email.value}}" placeholder="name@example.com" style="{{email.inputStyle}}">
+          <span style="{{email.noteStyle}}">{{email.note}}</span>
+        </label>
+
+        <!-- Phone (optional) -->
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 600">Phone <span style="color: #5B6575; font-weight: 400">(optional)</span></span>
+          <input type="tel" value="{{phone.value}}" placeholder="10 digits, e.g. 9820012345" style="{{phone.inputStyle}}">
+          <span style="{{phone.noteStyle}}">{{phone.note}}</span>
+        </label>
+
+        <!-- Course -->
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 600">Course <span style="color: #B4232C">*</span></span>
+          <span style="{{course.inputStyle}}; display: flex; align-items: center; justify-content: space-between">
+            <span style="{{course.valueStyle}}">{{course.value}}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+          <span style="{{course.noteStyle}}">{{course.note}}</span>
+        </label>
+
+        <!-- Status -->
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 600">Status <span style="color: #B4232C">*</span></span>
+          <span style="{{status.inputStyle}}; display: flex; align-items: center; justify-content: space-between">
+            <span>{{status.value}}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+          <span style="{{status.noteStyle}}">{{status.note}}</span>
+        </label>
+
+        <!-- Enrolled on (date picker, WM date format) -->
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 600">Enrolled on <span style="color: #B4232C">*</span></span>
+          <span style="{{enrolledOn.inputStyle}}; display: flex; align-items: center; justify-content: space-between">
+            <span style="{{enrolledOn.valueStyle}}">{{enrolledOn.value}}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </span>
+          <span style="{{enrolledOn.noteStyle}}">{{enrolledOn.note}}</span>
+        </label>
+
+        <!-- Fees paid (rupees, comma every 3 digits) -->
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 600">Fees paid (₹) <span style="color: #B4232C">*</span></span>
+          <input type="text" inputmode="numeric" value="{{feesPaid.value}}" placeholder="0" style="{{feesPaid.inputStyle}}">
+          <span style="{{feesPaid.noteStyle}}">{{feesPaid.note}}</span>
+        </label>
+      </div>
+
+      <!-- Actions: width from padding; wrap on phones -->
+      <div style="padding: 16px 20px; border-top: 1px solid #E3E6EB; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px">
+        <a href="{{backHref}}" style="display: inline-flex; align-items: center; padding: 10px 18px; min-height: 44px; box-sizing: border-box; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #1B2330; font-weight: 600; text-decoration: none">Cancel</a>
+        <button type="button" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; min-height: 44px; border: 0; border-radius: 8px; background: #2453D6; color: #FFFFFF; font: inherit; font-weight: 600">{{submitLabel}}</button>
+      </div>
+    </form>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["create","edit"],"default":"create"},"showErrors":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+var mode = this.props.mode ?? 'create';
+var showErrors = this.props.showErrors ?? false;
+var input = 'height: 44px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; font: inherit; color: #1B2330; background: #FFFFFF; min-width: 0; ';
+var ok = input + 'border: 1px solid #CDD2DA';
+var bad = input + 'border: 1px solid #B4232C';
+var help = 'color: #5B6575; font-size: 13px';
+var err = 'color: #B4232C; font-size: 13px';
+var placeholder = 'color: #8A93A1';
+var dark = 'color: #1B2330';
+function field(value, helper, error, valueStyle) {
+var hasError = showErrors && !!error;
+return {
+value: value,
+inputStyle: hasError ? bad : ok,
+note: hasError ? error : helper,
+noteStyle: hasError ? err : help,
+valueStyle: valueStyle || dark
+};
+}
+var edit = mode === 'edit';
+if (showErrors) {
+return {
+title: 'Add student', submitLabel: 'Add student', backHref: 'Main.dc.html', backLabel: 'Back to students', showErrors: true,
+name: field('', '2 to 50 letters.', 'Name is required.'),
+email: field('aarav@', 'Used to contact the student.', 'Enter a valid email address, like name@example.com.'),
+phone: field('12345', '10 digits.', 'Phone must be exactly 10 digits.'),
+course: field('Select a course', 'Choose one course.', 'Course is required.', placeholder),
+status: field('Active', 'Active, Inactive or Graduated.', ''),
+enrolledOn: field('Select a date', 'Today or earlier.', 'Enrolled on is required.', placeholder),
+feesPaid: field('45,000', 'Whole rupees, 0 to 10,000,000.', '')
+};
+}
+return {
+title: edit ? 'Edit student' : 'Add student',
+submitLabel: edit ? 'Save changes' : 'Add student',
+backHref: edit ? 'Details.dc.html' : 'Main.dc.html',
+backLabel: edit ? 'Back to student' : 'Back to students',
+showErrors: false,
+name: field(edit ? 'Aarav Sharma' : '', '2 to 50 letters.', ''),
+email: field(edit ? 'aarav.sharma@example.com' : '', 'Used to contact the student.', ''),
+phone: field(edit ? '9820012345' : '', '10 digits.', ''),
+course: field(edit ? 'Full Stack Web' : 'Select a course', 'Choose one course.', '', edit ? dark : placeholder),
+status: field(edit ? 'Active' : 'Active', 'Active, Inactive or Graduated.', ''),
+enrolledOn: field(edit ? 'August 12, 2026' : 'Select a date', 'Today or earlier.', '', edit ? dark : placeholder),
+feesPaid: field(edit ? '45,000' : '', 'Whole rupees, 0 to 10,000,000.', '')
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Delete student — confirm</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<!-- Dimmed page behind the dialog -->
+<div style="min-height: 100%; height: 100%; box-sizing: border-box; background: rgba(27, 35, 48, 0.45); font-family: 'Public Sans', system-ui, sans-serif; color: #1B2330; font-size: 14px; line-height: 150%; display: flex; align-items: center; justify-content: center; padding: 16px">
+  <!-- Dialog: width from content, max 440px; buttons wrap on phones -->
+  <div role="alertdialog" aria-labelledby="delete-title" aria-describedby="delete-text" style="width: 100%; max-width: 440px; box-sizing: border-box; background: #FFFFFF; border-radius: 12px; box-shadow: 0 12px 32px rgba(17, 24, 39, 0.18); display: flex; flex-direction: column">
+    <div style="padding: 20px 20px 0; display: flex; gap: 16px; align-items: flex-start">
+      <span style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #FDECEC; color: #B4232C; display: flex; align-items: center; justify-content: center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+      </span>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 id="delete-title" style="margin: 0; font-size: 18px; font-weight: 600">Delete student?</h2>
+        <p id="delete-text" style="margin: 0; color: #3A4352"><strong>Aarav Sharma</strong> will be removed permanently. This can't be undone.</p>
+      </div>
+    </div>
+    <div style="padding: 20px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px">
+      <button type="button" style="padding: 10px 18px; min-height: 44px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #1B2330; font: inherit; font-weight: 600">Cancel</button>
+      <button type="button" style="padding: 10px 18px; min-height: 44px; border: 0; border-radius: 8px; background: #B4232C; color: #FFFFFF; font: inherit; font-weight: 600">Delete</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

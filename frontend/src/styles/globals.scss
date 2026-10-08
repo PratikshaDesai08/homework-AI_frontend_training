@@ -12,9 +12,17 @@
 @use "components/student-filters";
 @use "components/student-status-tag";
 @use "components/student-name-cell";
+@use "components/back-link";
+@use "components/detail-list";
+@use "components/detail-skeleton";
+@use "components/form-field";
+@use "components/student-form";
+@use "components/confirm-dialog";
+@use "components/toast";
 
 // Pages
 @use "pages/student-list";
+@use "pages/student-details";
 
 // Base reset
 *,

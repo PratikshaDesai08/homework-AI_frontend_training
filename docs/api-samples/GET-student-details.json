@@ -1,0 +1,12 @@
+{
+    "id": 25,
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@example.com",
+    "phone": "9820012345",
+    "course": "Full Stack Web",
+    "status": "Active",
+    "enrolledOn": "2026-08-12",
+    "feesPaid": 45000,
+    "createdAt": "2026-10-08T06:41:37.000Z",
+    "updatedAt": "2026-10-08T06:41:37.000Z"
+}

@@ -1,0 +1,34 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Success / error toast (top right)
+.p-toast.app-toast {
+  max-width: calc(100vw - #{$space-8});
+
+  .p-toast-message {
+    border-radius: $radius-md;
+  }
+
+  .p-toast-message-success {
+    background: c("green-g2");
+    border-color: c("green-g1");
+    color: c("green-g1");
+
+    .p-toast-message-icon,
+    .p-toast-icon-close {
+      color: c("green-g1");
+    }
+  }
+
+  .p-toast-message-error {
+    background: c("red-r2");
+    border-color: c("red-r1");
+    color: c("red-r1");
+
+    .p-toast-message-icon,
+    .p-toast-icon-close {
+      color: c("red-r1");
+    }
+  }
+}

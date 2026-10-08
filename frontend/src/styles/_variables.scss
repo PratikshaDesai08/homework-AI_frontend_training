@@ -26,6 +26,7 @@ $colors-day: (
   "green-g2": #e3f4ea, // active tag background
   "red-r1": #b4232c, // destructive / error
   "red-r2": #fdecec, // error tint
+  "overlay-o1": rgba(27, 35, 48, 0.45), // dimmed page behind dialogs
 );
 
 // ---- Colours: night (dark mode), same names 1:1 ----
@@ -47,6 +48,7 @@ $colors-night: (
   "green-g2": #173726,
   "red-r1": #f08088,
   "red-r2": #3a1c1f,
+  "overlay-o1": rgba(0, 0, 0, 0.6),
 );
 
 // Constant colours (same in both modes)
@@ -108,6 +110,17 @@ $skeleton-columns: 2.4fr 1.2fr 0.8fr 1fr 0.8fr 0.8fr; // matches the table's col
 $skeleton-columns-mobile: 2fr 1fr;
 $skeleton-pulse-duration: 1.4s;
 $skeleton-pulse-opacity: 0.5;
+
+// ---- HW2: forms, details, dialogs ----
+$form-max-width: 55rem; // 880
+$form-field-min-width: 17.5rem; // 280: 2 columns on wide screens, 1 on phones
+$detail-item-min-width: 15rem; // 240
+$details-avatar-size: 3.5rem; // 56
+$dialog-max-width: 27.5rem; // 440
+$dialog-icon-size: 2.5rem; // 40
+$busy-opacity: 0.6; // table while the next page loads
+$shadow-dialog: 0 0.75rem 2rem rgba(17, 24, 39, 0.18);
+$transition-fast: 150ms ease;
 
 // ---- WM breakpoints: 1920 → 1600 → 1366 → 1280 → 1024 → 991 → 768 → 640 → 480 → 375 ----
 $breakpoints: (

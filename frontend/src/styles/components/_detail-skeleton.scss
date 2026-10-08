@@ -1,0 +1,56 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// Loading placeholder for the details and edit pages
+.detail-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.detail-skeleton-heading {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+}
+
+.detail-skeleton-avatar {
+  flex: none;
+  width: $details-avatar-size;
+  height: $details-avatar-size;
+  border-radius: $radius-round;
+}
+
+.detail-skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.detail-skeleton-title {
+  height: $space-6;
+  width: $skeleton-line-width-wide;
+}
+
+.detail-skeleton-card {
+  padding: $space-5;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($detail-item-min-width, 1fr));
+  gap: $space-5 $space-6;
+  background: c("white-w1");
+  border: $border-width solid c("gray-g4");
+  border-radius: $radius-lg;
+}
+
+.detail-skeleton-item {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.detail-skeleton-label {
+  height: $skeleton-line-height;
+  width: $skeleton-line-width-wide;
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Student details</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2453D6}a:hover{color:#1A3FA8}
+</style>
+</helmet>
+<div style="min-height: 100%; background: #F5F6F8; font-family: 'Public Sans', system-ui, sans-serif; color: #1B2330; font-size: 14px; line-height: 150%">
+
+  <!-- Top bar -->
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E3E6EB">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 12px clamp(16px, calc(100vw - 768px), 40px); display: flex; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px">
+        <span style="width: 28px; height: 28px; border-radius: 6px; background: #2453D6; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px">SA</span>
+        Student Admin
+      </div>
+      <span style="width: 32px; height: 32px; border-radius: 50%; background: #E6EDFC; color: #2453D6; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px">PP</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: clamp(20px, calc(100vw - 748px), 32px) clamp(16px, calc(100vw - 768px), 40px) 48px; display: flex; flex-direction: column; gap: clamp(16px, calc(100vw - 760px), 24px)">
+
+    <!-- Back link -->
+    <a href="Main.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; text-decoration: none">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to students
+    </a>
+
+    <!-- Heading: avatar + name + status, actions on the right (wrap under on small screens) -->
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 16px; min-width: 0">
+        <span style="flex: none; width: 56px; height: 56px; border-radius: 50%; background: #E6EDFC; color: #2453D6; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px">AS</span>
+        <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px">
+            <h1 style="margin: 0; font-size: clamp(22px, calc(100vw - 746px), 28px); line-height: 120%; font-weight: 700">Aarav Sharma</h1>
+            <span style="display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #E3F4EA; color: #1D6B3F">Active</span>
+          </div>
+          <span style="color: #5B6575; overflow-wrap: anywhere">aarav.sharma@example.com</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <a href="Edit.dc.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; min-height: 44px; box-sizing: border-box; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #1B2330; font-weight: 600; text-decoration: none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+          Edit
+        </a>
+        <a href="DeleteConfirm.dc.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; min-height: 44px; box-sizing: border-box; border: 1px solid #B4232C; border-radius: 8px; background: #FFFFFF; color: #B4232C; font-weight: 600; text-decoration: none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+          Delete
+        </a>
+      </div>
+    </div>
+
+    <!-- Details card: label / value pairs in a grid (3 columns wide, 1 column on phones) -->
+    <section aria-labelledby="details-title" style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px">
+      <h2 id="details-title" style="margin: 0; padding: 16px 20px; font-size: 16px; font-weight: 600; border-bottom: 1px solid #E3E6EB">Student details</h2>
+      <dl style="margin: 0; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px 24px">
+        <sc-for list="{{fields}}" as="field" hint-placeholder-count="8">
+          <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+            <dt style="color: #5B6575; font-size: 13px">{{field.label}}</dt>
+            <dd style="{{field.valueStyle}}">{{field.value}}</dd>
+          </div>
+        </sc-for>
+      </dl>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":760}}'>
+class Component extends DCLogic {
+renderVals() {
+var plain = 'margin: 0; font-size: 15px; overflow-wrap: anywhere';
+return {
+fields: [
+{ label: 'Full name', value: 'Aarav Sharma', valueStyle: plain },
+{ label: 'Email', value: 'aarav.sharma@example.com', valueStyle: plain },
+{ label: 'Phone', value: '9820012345', valueStyle: plain },
+{ label: 'Course', value: 'Full Stack Web', valueStyle: plain },
+{ label: 'Status', value: 'Active', valueStyle: plain },
+{ label: 'Enrolled on', value: 'August 12, 2026', valueStyle: plain },
+{ label: 'Fees paid', value: '₹45,000', valueStyle: plain },
+{ label: 'Added on', value: 'October 8, 2026', valueStyle: plain },
+{ label: 'Last updated', value: 'October 8, 2026', valueStyle: plain }
+]
+};
+}
+}
+</script>
+</body>
+</html>

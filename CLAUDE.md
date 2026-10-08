@@ -1,17 +1,19 @@
 # Student Admin — Frontend (AI Frontend Training homework)
 
-Admin screen for managing students in a training institute: list, search and filter students, add, view, edit and delete them. Used by office staff on desktop, tablet and phone. Built by Pratiksha Patil (a backend developer) as homework for "TL | AI Frontend Training" (Notion). HW1 = the list screen with mock data. HW2 = full CRUD on the real API in `backend/`.
+Admin screen for managing students in a training institute: list, search and filter students, add, view, edit and delete them. Used by office staff on desktop, tablet and phone. Built by Pratiksha Patil (a backend developer) as homework for "TL | AI Frontend Training" (Notion). HW1 = the list screen with mock data. HW2 = full CRUD on the real API in `backend/` (NestJS, see backend/README.md).
 
 Stack: Next.js 15 (App Router) · React 19 · TypeScript · PrimeReact 10 · SCSS · TanStack Query 5 · axios · Playwright
-Backend API (HW2): NestJS + SQLite in `backend/`, base URL in `NEXT_PUBLIC_API_BASE_URL` (see `frontend/.env.example`)
+Backend API: NestJS 12 + TypeORM + SQLite in `backend/` (run: `cd backend && npm run start:dev`, port 4000, Swagger /api/docs).
+Frontend reads it from `NEXT_PUBLIC_API_BASE_URL` (see `frontend/.env.example`). Deploy: Vercel (frontend/) + Render (render.yaml).
 
 ## Commands (run from `frontend/`)
 npm run dev                 # start the app on localhost:3000 — only ONE dev server at a time
 npx tsc --noEmit            # type-check — run after every change
 npm run lint
 npm run build
-npm run test:e2e            # Playwright, read-only tests (project "default")
-npm run test:e2e:mutation   # create/edit/delete tests — opt-in only
+npm run test:e2e            # Playwright, read-only + responsive (project "default"), API must be running
+npm run test:e2e:mutation   # create/edit/delete tests (project "mutation"), opt-in only
+npm run test:e2e:all        # both, one HTML report (playwright-report/)
 npm run test:e2e:ui         # visual runner
 Test local code with: PLAYWRIGHT_BASE_URL=http://localhost:3000
 
@@ -19,19 +21,26 @@ Test local code with: PLAYWRIGHT_BASE_URL=http://localhost:3000
 src/app/(main)/students/...  pages: list / create / details/[id] / edit/[id]
 src/components/common/       shared UI: PageHeading, StateBlock (empty/error), TableSkeleton (loading), AppDataTable (PrimeReact DataTable wrapper)
 src/components/layout/       AppHeader (top bar, used by src/app/(main)/layout.tsx)
-src/components/students/     StudentListScreen, StudentFilters, StudentNameCell, StudentStatusTag
-src/api-services/            axios calls, one file per domain (StudentService.ts) — HW2
-src/hooks/API/students/      TanStack Query hooks (useGetStudentsList…) — HW2
-src/utils/                   api-integration.ts (API_ENDPOINTS, QUERIES), format.ts (WM date/number)
-src/mocks/                   typed mock data (HW1 only)
+src/components/common/       + BackLink, DetailList, DetailSkeleton, FormField, ToastProvider (useAppToast)
+src/components/students/     StudentListScreen, StudentFilters, StudentNameCell, StudentStatusTag,
+                             StudentDetailsScreen, StudentForm (create + edit), StudentCreateScreen, StudentEditScreen
+src/app/providers.tsx        QueryClientProvider + ToastProvider + global ConfirmDialog
+src/api-services/            http.ts (axios instance, toApiError), StudentService.ts
+src/hooks/API/students/      useGetStudentsList, useGetStudentDetails, useCreateStudent, useUpdateStudent, useDeleteStudent
+src/hooks/                   useStudentListParams (filters + page in the URL), useDebouncedValue, useConfirmDeleteStudent
+src/utils/                   api-integration.ts (API_ENDPOINTS, QUERIES), format.ts (WM date/number),
+                             student-rules.ts (form validation = backend DTO rules and messages), breakpoints.ts
 src/types/                   TypeScript types — no `any`
 src/styles/                  _variables.scss (ALL raw values + day/night colour maps), _functions.scss (c("blue-b1") → var(--blue-b1)),
                              _theme.scss (CSS vars per theme), _mixins.scss (below("md")), components/, pages/
 e2e/                         Playwright: <feature>.spec.ts, <feature>.mutation.spec.ts
 docs/ (repo root)            PLAN.md, design-check.md, prompt-log.md, screenshots/, reports
 
-## HW1 demo states
-/students/list?state=loading | empty | error shows that state with mock data (StudentListScreen). HW2 replaces this with the API hook.
+## Data flow (HW2)
+Screen → hook (src/hooks/API/students) → StudentService → axios `http` → API. Mutations invalidate the `students` query key so lists refresh.
+List filters/page live in the URL (useStudentListParams). Form rules live in src/utils/student-rules.ts and must match
+backend/src/students/dto/create-student.dto.ts (rules AND messages). Change both together.
+Tests: e2e/students.spec.ts (read-only, uses seed students), students.mutation.spec.ts, responsive.spec.ts; helpers in e2e/helpers.ts.
 
 ## Rules
 - Plan first, then one step at a time. Run type-check and lint after each step and show the real output.

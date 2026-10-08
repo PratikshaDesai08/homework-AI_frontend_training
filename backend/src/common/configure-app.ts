@@ -9,8 +9,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 function validationExceptionFactory(validationErrors: ValidationError[]) {
   const errors: Record<string, string> = {};
   for (const error of validationErrors) {
-    const messages = Object.values(error.constraints ?? {});
-    if (messages.length > 0) errors[error.property] = messages[messages.length - 1];
+    const constraints = error.constraints ?? {};
+    const messages = Object.values(constraints);
+    // A missing value shows "X is required." rather than every other rule it also fails
+    if (messages.length > 0) errors[error.property] = constraints.isNotEmpty ?? messages[messages.length - 1];
   }
   return new BadRequestException({ statusCode: 400, message: 'Please fix the highlighted fields.', errors });
 }

@@ -1,0 +1,31 @@
+{
+    "items": [
+        {
+            "id": 25,
+            "name": "Aarav Sharma",
+            "email": "aarav.sharma@example.com",
+            "phone": "9820012345",
+            "course": "Full Stack Web",
+            "status": "Active",
+            "enrolledOn": "2026-08-12",
+            "feesPaid": 45000,
+            "createdAt": "2026-10-08T06:41:37.000Z",
+            "updatedAt": "2026-10-08T06:41:37.000Z"
+        },
+        {
+            "id": 24,
+            "name": "Diya Kulkarni",
+            "email": "diya.kulkarni@example.com",
+            "phone": "9820012346",
+            "course": "Data Science",
+            "status": "Active",
+            "enrolledOn": "2026-07-28",
+            "feesPaid": 62500,
+            "createdAt": "2026-10-08T06:41:37.000Z",
+            "updatedAt": "2026-10-08T06:41:37.000Z"
+        }
+    ],
+    "total": 25,
+    "page": 1,
+    "limit": 2
+}

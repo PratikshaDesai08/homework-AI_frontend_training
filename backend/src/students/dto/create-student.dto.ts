@@ -63,10 +63,12 @@ export class CreateStudentDto {
   phone?: string | null;
 
   @ApiProperty({ enum: STUDENT_COURSES })
+  @IsNotEmpty({ message: 'Course is required.' })
   @IsIn(STUDENT_COURSES, { message: `Course must be one of: ${STUDENT_COURSES.join(', ')}.` })
   course: StudentCourse;
 
   @ApiProperty({ enum: STUDENT_STATUSES })
+  @IsNotEmpty({ message: 'Status is required.' })
   @IsIn(STUDENT_STATUSES, { message: `Status must be one of: ${STUDENT_STATUSES.join(', ')}.` })
   status: StudentStatus;
 
@@ -76,6 +78,7 @@ export class CreateStudentDto {
   enrolledOn: string;
 
   @ApiProperty({ example: 45000, minimum: 0, maximum: STUDENT_RULES.feesMax, description: 'Whole rupees' })
+  @IsNotEmpty({ message: 'Fees paid is required.' })
   @IsInt({ message: 'Fees paid must be a whole number.' })
   @Min(0, { message: 'Fees paid cannot be negative.' })
   @Max(STUDENT_RULES.feesMax, { message: 'Fees paid cannot be more than 10,000,000.' })

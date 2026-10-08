@@ -1,64 +1,69 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
+import { toApiError } from "@/api-services/http";
 import AppDataTable from "@/components/common/AppDataTable";
 import PageHeading from "@/components/common/PageHeading";
 import StateBlock from "@/components/common/StateBlock";
 import StudentFilters from "@/components/students/StudentFilters";
 import StudentNameCell from "@/components/students/StudentNameCell";
 import StudentStatusTag from "@/components/students/StudentStatusTag";
-import { MOCK_STUDENTS } from "@/mocks/students";
+import { useGetStudentsList } from "@/hooks/API/students/useGetStudentsList";
+import { useConfirmDeleteStudent } from "@/hooks/useConfirmDeleteStudent";
+import { useDebouncedValue } from "@/hooks/useDebouncedValue";
+import { STUDENTS_PER_PAGE, useStudentListParams } from "@/hooks/useStudentListParams";
 import type { Student, StudentListFilters } from "@/types/student";
 import { formatDate, formatRupees } from "@/utils/format";
 
-const ROWS_PER_PAGE = 10;
-const EMPTY_FILTERS: StudentListFilters = { search: "", course: null, status: null };
-
-/**
- * HW1 demo switch: ?state=loading | empty | error shows that state with mock data.
- * Anything else (or nothing) shows the filled list. HW2 replaces this with the API hook.
- */
-type DemoState = "loading" | "empty" | "error" | "filled";
-
-function readDemoState(value: string | null): DemoState {
-  return value === "loading" || value === "empty" || value === "error" ? value : "filled";
-}
+const SEARCH_DELAY_MS = 300;
 
 // Student list page: heading, filters, table with loading / empty / error / filled states.
 export default function StudentListScreen() {
-  const router = useRouter();
-  const demoState = readDemoState(useSearchParams().get("state"));
+  // Filters + page come from the URL (see useStudentListParams)
+  const { filters, page, update } = useStudentListParams();
 
-  // Screen-only state: current filters and the first row of the current page
-  const [filters, setFilters] = useState<StudentListFilters>(EMPTY_FILTERS);
-  const [first, setFirst] = useState(0);
+  // The search box updates instantly; the URL (and the API call) follows 300 ms after typing stops
+  const [searchInput, setSearchInput] = useState(filters.search);
+  const debouncedSearch = useDebouncedValue(searchInput.trim(), SEARCH_DELAY_MS);
+  useEffect(() => {
+    // Only once typing has settled, so "Clear filters" isn't undone by an older search term
+    if (debouncedSearch === searchInput.trim() && debouncedSearch !== filters.search) {
+      update({ search: debouncedSearch });
+    }
+  }, [debouncedSearch, searchInput, filters.search, update]);
 
-  const hasFilters = filters.search.trim() !== "" || filters.course !== null || filters.status !== null;
+  const listQuery = useGetStudentsList({
+    search: filters.search || undefined,
+    course: filters.course ?? undefined,
+    status: filters.status ?? undefined,
+    page,
+    limit: STUDENTS_PER_PAGE,
+  });
+  const { confirmDelete } = useConfirmDeleteStudent();
 
-  // Apply search + filters to the mock data (the API does this in HW2)
-  const visibleStudents = useMemo(() => {
-    const allStudents = demoState === "empty" ? [] : MOCK_STUDENTS;
-    const term = filters.search.trim().toLowerCase();
-    return allStudents.filter(
-      (student) =>
-        (term === "" ||
-          student.name.toLowerCase().includes(term) ||
-          student.email.toLowerCase().includes(term)) &&
-        (filters.course === null || student.course === filters.course) &&
-        (filters.status === null || student.status === filters.status),
-    );
-  }, [demoState, filters]);
+  const students = listQuery.data?.items ?? [];
+  const total = listQuery.data?.total ?? 0;
+  const hasFilters = filters.search !== "" || filters.course !== null || filters.status !== null;
 
-  // Any filter change goes back to page 1
   const handleFilterChange = (changed: Partial<StudentListFilters>) => {
-    setFilters((current) => ({ ...current, ...changed }));
-    setFirst(0);
+    if (changed.search !== undefined) setSearchInput(changed.search);
+    else update(changed);
   };
 
-  const clearFilters = () => handleFilterChange(EMPTY_FILTERS);
+  const clearFilters = () => {
+    setSearchInput("");
+    update({ search: "", course: null, status: null });
+  };
+
+  const addStudentButton = (
+    <Link href="/students/create" className="p-button primary-button">
+      <i className="pi pi-plus" aria-hidden="true" />
+      <span className="p-button-label">Add student</span>
+    </Link>
+  );
 
   // Empty state: different copy for "no data at all" vs "nothing matches the filters"
   const emptyState = hasFilters ? (
@@ -69,55 +74,53 @@ export default function StudentListScreen() {
       action={<Button label="Clear filters" className="secondary-button" onClick={clearFilters} />}
     />
   ) : (
-    <StateBlock
-      variant="empty"
-      title="No students yet"
-      message="Students you add will appear here."
-      action={<Button label="Add student" icon="pi pi-plus" className="primary-button" />}
-    />
+    <StateBlock variant="empty" title="No students yet" message="Students you add will appear here." action={addStudentButton} />
   );
 
   return (
     <div className="student-list-container">
-      <PageHeading
-        title="Students"
-        subtitle="View and manage every enrolled student."
-        actions={<Button label="Add student" icon="pi pi-plus" className="primary-button" />}
-      />
+      <PageHeading title="Students" subtitle="View and manage every enrolled student." actions={addStudentButton} />
 
       <section className="student-list-card" aria-label="Student list">
-        <StudentFilters filters={filters} onChange={handleFilterChange} />
+        <StudentFilters filters={{ ...filters, search: searchInput }} onChange={handleFilterChange} />
 
-        {demoState === "error" ? (
+        {listQuery.isError && !listQuery.data ? (
           <StateBlock
             variant="error"
             title="Could not load students"
-            message="Something went wrong while loading the student list. Please try again."
+            message={toApiError(listQuery.error).message}
             action={
               <Button
                 label="Try again"
                 icon="pi pi-refresh"
                 className="secondary-button"
-                onClick={() => router.replace("/students/list")}
+                loading={listQuery.isFetching}
+                onClick={() => listQuery.refetch()}
               />
             }
           />
         ) : (
           <AppDataTable<Student>
-            value={visibleStudents}
+            value={students}
             dataKey="id"
+            totalRecords={total}
             ariaLabel="Students"
             recordLabel="students"
-            loading={demoState === "loading"}
+            loading={listQuery.isPending}
+            busy={listQuery.isPlaceholderData}
             emptyState={emptyState}
-            first={first}
-            rows={ROWS_PER_PAGE}
-            onPageChange={setFirst}
+            first={(page - 1) * STUDENTS_PER_PAGE}
+            rows={STUDENTS_PER_PAGE}
+            onPageChange={(first) => update({ ...filters, page: first / STUDENTS_PER_PAGE + 1 })}
           >
             <Column
               header="Name"
               className="app-data-table-cell-lead"
-              body={(student: Student) => <StudentNameCell name={student.name} email={student.email} />}
+              body={(student: Student) => (
+                <Link href={`/students/details/${student.id}`} className="student-list-name-link">
+                  <StudentNameCell name={student.name} email={student.email} />
+                </Link>
+              )}
             />
             <Column header="Course" field="course" />
             <Column
@@ -142,14 +145,27 @@ export default function StudentListScreen() {
               headerClassName="app-data-table-cell-actions"
               body={(student: Student) => (
                 <div className="student-list-actions">
-                  <Button icon="pi pi-eye" rounded text aria-label={`View ${student.name}`} />
-                  <Button icon="pi pi-pencil" rounded text aria-label={`Edit ${student.name}`} />
+                  <Link
+                    href={`/students/details/${student.id}`}
+                    className="p-button p-button-icon-only p-button-rounded p-button-text"
+                    aria-label={`View ${student.name}`}
+                  >
+                    <i className="pi pi-eye" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    href={`/students/edit/${student.id}`}
+                    className="p-button p-button-icon-only p-button-rounded p-button-text"
+                    aria-label={`Edit ${student.name}`}
+                  >
+                    <i className="pi pi-pencil" aria-hidden="true" />
+                  </Link>
                   <Button
                     icon="pi pi-trash"
                     rounded
                     text
                     className="danger-icon-button"
                     aria-label={`Delete ${student.name}`}
+                    onClick={() => confirmDelete(student)}
                   />
                 </div>
               )}

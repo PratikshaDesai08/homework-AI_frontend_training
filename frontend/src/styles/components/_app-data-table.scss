@@ -122,6 +122,12 @@
   }
 }
 
+// While the next page / filter loads, the old rows stay visible but dimmed
+.app-data-table-busy .p-datatable-tbody {
+  opacity: $busy-opacity;
+  transition: opacity $transition-fast;
+}
+
 .app-data-table-table {
   width: 100%;
   min-width: $table-min-width;
@@ -197,6 +203,7 @@
         flex: none;
         color: c("gray-g7");
         font-size: $font-size-sm;
+        font-weight: $font-weight-regular;
         text-align: left;
       }
 
